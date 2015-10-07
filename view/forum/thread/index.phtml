@@ -1,0 +1,84 @@
+<?php
+    $title = $this->thread['title'];
+    $this->headTitle($title);
+        
+    echo $this->headLink()->prependStylesheet($this->basePath() . '/content/css/dl-forum.css');
+?>
+<div id="subwrapper">
+    <div class="forum directory_path">
+        <p class="thread subdirectory">
+            <a href="/forum">Index</a><span class="libArrow"></span>
+        </p>
+        <p class="thread subdirectory">
+            <span class="libUnarrow"></span>
+            <a href="/forum?id=<?= $this->overView['id'] ?>"><?= $this->overView['title'] ?></a><span class="libArrow"></span>
+            <p class="thread subdirectory">
+                <span class="libUnarrow"></span>
+                <a href="/forum?id=<?= $this->overView['thread_id'] ?>"><?= $this->overView['thread_title'] ?></a><span class="libArrow"></span>
+            </p>
+    </div>
+    <?php foreach($this->posts as $post): ?>
+    <div id="<?= $post['id'] ?>" class="f_post">
+        <div class="thread panel post date">
+	<span class="thread panel post date text"><?= $post['post_date'] ?></span>
+        <?php if ($this->zfcUserIdentity() && $this->zfcUserIdentity()->getUsername() == $post['username']): ?>
+            <span class="thread panel post tools"><a href="/forum/post/edit?id=<?= $post['id'] ?>">Edit</a></span>
+            <?php endif ?>
+	</div>
+        <div class="thread panel user">
+            <a href="/forum/account/profile?user=<?= $post['username'] ?>"><?= $post['username'] ?></a>
+            <img class="thread user avatar" src="<?= $post['avatar'] ?>" title="<?= $post['username'] ?>'s Avatar">
+            <span class="thread user title"><?= $post['title'] ?></span>
+            <span class="thread user postcount">Posts: <?= $post['post_count'] ?></span>
+            <span class="thread user joindate">Joined: <?= $post['join_date'] ?></span>
+	</div>
+
+	<div class="thread panel post">
+	    <div class="thread panel post main"><?= $post['content'] ?>
+                <?php if ($post['last_updated'] != null): ?>
+                <span class="italic updated">Last edited: <?= $post['last_updated'] ?></span>
+                <?php endif ?>
+	    </div>
+	    <div class="thread panel post sig"><?=$post['signature']?></div>
+
+	</div>
+    </div>
+    <?php endforeach ?>
+    
+    <div id="pagination">
+    <?php if ($this->pageNo != 1): ?>
+        <?php $k = $this->pageNo-1?>
+        <a href="/forum/thread?id=<?= $this->overView['thread_id'] ?>&page=1" class="pagination_btn">&lt;&lt;</a>
+        <a href="/forum/thread?id=<?= $this->overView['thread_id'] ?>&page=<?= $k ?>" class="pagination_btn">&lt;</a>
+    <?php endif ?>
+    <?php $j = 0; ?>
+    <?php for ($i = 0; $i <=($this->paginater/20); $i++): ?>
+        <?php $j = $i + 1 ?>
+        <a href="/forum/thread?id=<?= $this->overView['thread_id']?>&page=<?= $j?>" class="pagination_btn"><?= $j?></a>
+    <?php endfor ?>	
+    <?php if ($this->pageNo < $j): ?>
+        <?php $l = $this->pageNo + 1?>
+        <a href="/forum/thread?id=<?=$this->overView['thread_id']?>&page=<?= $l?>" class="pagination_btn">&gt;</a>
+        <a href="/forum/thread?id=<?=$this->overView['thread_id']?>&page=<?= $j?>" class="pagination_btn">&gt;&gt;</a>
+    <?php endif ?>	
+    </div>
+    <div style="clear:both;"></div>
+</div>
+	
+<div id="reply">
+<?php if ($this->zfcUserIdentity()): ?>
+    <h2 class="title">Quick Reply</h2>
+    <form action="/forum/post/new?thread=<?= $this->threadid ?>" method="POST">
+        <fieldset>
+			<input type="hidden" name="thread" value="<?= $this->threadid ?>">
+            <textarea autocomplete="off" type="textarea" rows="3" size="40" name="message" style="width: 924px; height: 112px; resize: none;"></textarea>
+            <input type="submit" value="Reply" style="float: right"></input>
+            <input type="button" value="Go Advanced" style="float: right" onclick="window.location.href='/forum/post/advanced?thread=<?=$this->threadid ?>'"></input>
+        </fieldset>
+    </form>
+<?php else: ?>
+    <h2 class="title">Reply</h2>
+    <p>Please login to reply</p>
+<?php endif ?>
+    
+</div>

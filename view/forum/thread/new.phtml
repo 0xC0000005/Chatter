@@ -1,0 +1,44 @@
+<?php
+    $title = "New thread";
+    $this->headTitle($title);
+        
+    echo $this->headLink()->prependStylesheet($this->basePath() . '/content/css/dl-forum.css');
+?>
+
+<div id="subwrapper">
+    <div id="newThread">
+	<div class="new_head">New thread</div>
+        <form action="/forum/thread/new" method="POST">
+            <input type="hidden" name="id" value="<?= $this->forumId?>">
+            <label for="title">Title</label>
+            <input type="text" name="title" placeholder="thread title">
+            <?php if($this->zfcUserIdentity() && ($this->zfcUserIdentity()->getRole() == "Admin" || $this->zfcUserIdentity()->getRole() == "Superuser" )): ?>
+		<label for="important">Sticky/Important</label>
+		<input type="checkbox" name="sticky" value="sticky">
+            <?php endif ?>
+            <div class="edit_tools">
+				<input type="button" value="IMG" id="insert_tag_img">
+				<input type="button" value="URL" id="insert_tag_url">
+				<input type="button" value="COLOR" id="insert_tag_color">
+				<input type="button" value="FONTSIZE" id="insert_tag_fontsize">
+				<select id="selected_fontsize">
+							<option value="8">8</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="14">14</option>
+							<option value="18">18</option>
+				</select>
+				<input type="button" value="VIDEO" id="insert_tag_video">
+				<input type="button" value="VIDEO" id="insert_tag_video">
+				<input type="button" value="BOLD" id="insert_tag_bold">
+				<input type="button" value="ITALIC" id="insert_tag_italic">
+            </div>
+        <textarea id="new_post"></textarea>
+        <input type="submit" value="Create new thread">
+	</form>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="<?= $this->basePath() ?>/scripts/forum/thread/new/main.js"></script>

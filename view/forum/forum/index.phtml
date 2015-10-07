@@ -1,0 +1,41 @@
+<?php
+	$title = "Forum";
+	$this->headTitle($title);
+        
+        echo $this->headLink()->prependStylesheet($this->basePath() . '/content/css/chatter.css');
+?>
+<div id="subwrapper" class="index">
+	<div class="forum directory_path">
+	    <p>Welcome to <?= $this->baseName ?></p>
+	    <p>Threads: <?= $this->overView['threadcount'] ?> / Posts: <?= $this->overView['postcount'] ?> / Members: <?= $this->overView['usercount'] ?></p>
+        </div>
+	<div class="thread overview header">
+	    <span class="thread overview header title">Title</span>
+	    <span class="thread overview header views">Threads</span>
+	    <span class="thread overview header base_views">Last Post</span>
+	</div>
+	<?php foreach($this->forums as $forum): ?>
+            <div class="thread group"><div class="thread category"><?= $forum[0]['category']?></div>
+            <?php foreach($forum as $subforum): ?>
+                <div class="thread overview base">
+                    <div class="thread overview text">
+                        <span class="thread overview title">
+                            <a href="/forum?id=<?= $subforum['id'] ?>"><?= $subforum['title'] ?></a>
+                        </span>
+                        <span class="thread overview description"><?= $subforum['description'] ?></span>
+                        <div class="thread overview base_data">
+                            <span class="thread overview count"><?= $subforum['thread_count'] ?></span>
+                            <span class="thread overview count base_last">
+                            <?php if($subforum['last_poster']): ?>
+                            <a class="lhs" href="/forum/thread?id=<?= $subforum['last_thread_id'] ?>"><?= $subforum['last_thread'] ?></a> <?= $subforum['last_date'] ?> By <a href="/forum/account/profile?user=<?= $subforum['last_poster'] ?>"><?= $subforum['last_poster'] ?></a>
+                            <?php else: ?>
+                            <a>N/A</a>
+                            <?php endif ?>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach ?>
+            </div>
+	<?php endforeach ?>
+</div>

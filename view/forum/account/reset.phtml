@@ -1,0 +1,19 @@
+<?php
+$title = "Reset password";
+$this->headTitle($title);
+        
+    echo $this->headLink()->prependStylesheet($this->basePath() . '/content/css/chatter.css');
+?>
+
+<div id="login">
+    <h1><?php echo $this->translate('Reset Password'); ?></h1>
+
+    <form method="POST" action="/forum/account/reset">
+	<dt><label for="email">Email</label></dt>
+	<dd><input type="text" placeholder="enter your email" name="email"></dd>
+	<dd><input type="submit" value="Submit"></dd>
+    </form>	
+    <div class="result">
+	<p>If the email exists on our database, you will receive an email with your new password. The administrator advises that you change this password as soon as possible</p>
+    </div>	
+</div>

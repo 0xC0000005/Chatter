@@ -1,0 +1,12 @@
+<?php
+$title = "Admin Panel";
+$this->headTitle($title);
+        
+        echo $this->headLink()->prependStylesheet($this->basePath() . '/content/css/chatter.css');
+?>
+<div id="admin_base">
+    <div class="sidebar"></div>
+    <div id="mainContent"></div>
+</div>
+
+<script type="text/javascript" src="<?= $this->basePath() ?>/scripts/forum/settings/main.js"></script>

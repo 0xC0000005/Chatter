@@ -1,0 +1,11 @@
+<?php
+$title = "Password changed";
+$this->headTitle($title);
+        
+    echo $this->headLink()->prependStylesheet($this->basePath() . '/content/css/chatter.css');
+?>
+
+<div id="login">
+    <h1><?php echo $this->translate('Your password has been updated'); ?></h1>
+    <p>You may now log in with your new password</p>
+</div>

@@ -1,0 +1,39 @@
+<?php
+	$title = "New post";
+	$this->headTitle($title);
+        
+        echo $this->headLink()->prependStylesheet($this->basePath() . '/content/css/chatter.css');
+?>
+
+<div id="subwrapper">
+	<div id="newThread">
+		<div class="new_head">New Post</div>
+		<form action="/forum/post/new" method="POST">
+			<input type="hidden" name="thread" value="<?= $this->threadId?>">
+			<div class="edit_tools">
+				<input type="button" value="IMG" id="insert_tag_img">
+				<input type="button" value="URL" id="insert_tag_url">
+				<input type="button" value="COLOR" id="insert_tag_color">
+				<input type="button" value="FONTSIZE" id="insert_tag_fontsize">
+				<select id="selected_fontsize">
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="14">14</option>
+					<option value="18">18</option>
+					<option value="22">22</option>
+					<option value="24">24</option>
+				</select>
+				<input type="button" value="VIDEO" id="insert_tag_video">
+				<input type="button" value="BOLD" id="insert_tag_bold">
+				<input type="button" value="ITALIC" id="insert_tag_italic">
+			</div>
+			<textarea id="new_post"></textarea>
+
+			<input type="submit" value="Create Post">
+		</form>
+	</div>
+</div>
+
+
+<script type="text/javascript" src="<?= $this->basePath() ?>/scripts/forum/post/edit/main.js"></script>

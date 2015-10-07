@@ -1,0 +1,30 @@
+<?php
+$title = "Account settings";
+$this->headTitle($title);
+        
+        echo $this->headLink()->prependStylesheet($this->basePath() . '/content/css/chatter.css');
+?>
+<div id="account">
+    <div class="profile header"><h2>Account settings</h2></div>
+    <div class="account sidebar">
+	<div class="account category tab active" id="account_link_profile">Profile Settings</div>
+	<div class="account category tab" id="account_link_contact">About/Contact</div>
+	<div class="account category tab" id="account_link_subscriptions">Subscriptions</div>
+    </div>
+    <div class="account panel">
+	<div id="account_category_profile">
+			<form action="/forum/account" method="POST" class="settings">
+				<label for="avatar">Avatar URL:</label>
+				<input name="avatar" value="<?= $this->settings['avatar']?>">
+				<div class="current">
+					<img src="<?= $this->settings['avatar']?>">
+					<p>Current avatar</p>
+				</div>
+				<label for="signature">Signature:</label>
+				<textarea name="signature"><?= $this->settings['post_signature']?></textarea>
+				<input type="hidden" name="type" value="profile"/>
+				<button type="submit">Save changes</button>
+			</form>
+		</div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<?php
+$title = "New password";
+$this->headTitle($title);
+        
+    echo $this->headLink()->prependStylesheet($this->basePath() . '/content/css/chatter.css');
+?>
+
+<div id="login">
+    <h1><?php echo $this->translate('New password'); ?></h1>
+
+    <form method="POST" action="/forum/account/reset">
+	<dt><label for="password">New password</label></dt>
+	<dd><input type="text" placeholder="new password" name="password"></dd>
+	<input type="hidden" name="uuid" value="<?= $this->uuid?>">
+	<dd><input type="submit" value="Submit"></dd>
+    </form>	
+</div>

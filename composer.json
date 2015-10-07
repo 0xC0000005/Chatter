@@ -1,0 +1,33 @@
+{
+    "name": "0xC0000005/Chatter",
+    "description": "A lightweight forum module for ZF2",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+		"zend framework 2",
+		"forum"
+    ],
+    "homepage": "https://github.com/0xC0000005/Chatter-Forum",
+    "authors": [
+        {
+            "name": "Josh Martin",
+            "email": "contact@j-mart.in",
+            "homepage": "j-mart.in"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "zf-commons/zfc-base": "0.*",
+        "zf-commons/zfc-user": "1.*",
+        "rwoverdijk/assetmanager": "1.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Chatter": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+}

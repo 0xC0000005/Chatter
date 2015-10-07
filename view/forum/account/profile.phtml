@@ -1,0 +1,32 @@
+<?php
+$title = $this->user['username'] . "'s profile";
+$this->headTitle($title);
+        
+        echo $this->headLink()->prependStylesheet($this->basePath() . '/content/css/chatter.css');
+
+if ($this->user['role'] == "Superuser"){
+    $this->user['role'] = "admin";
+}
+?>
+<div class="subwrapper">
+    <div id="profile_base">
+	<div class="profile header"><h2><?= $this->user['username']?>'s profile</h2></div>
+	<div class="profile section">
+            <span class="profile element"><span class="profile unique_element">Name:</span> <?=$this->user['display_name']?></span>
+            <span class="profile element"><span class="profile unique_element">Title:</span> <?=$this->user['title']?></span>
+            <span class="profile element"><span class="profile unique_element">Member level:</span> <?=$this->user['role']?></span>
+            <span class="profile element"><span class="profile unique_element">Member since:</span> <?=$this->user['date_joined']?></span>
+            <span class="profile element"><span class="profile unique_element">Post count:</span> <?=$this->user['post_count']?></span>
+            <span class="profile element"><span class="profile unique_element">Posts-per-day:</span> <?=$this->user['post_per_day']?></span>
+	</div>
+	<div class="profile section small">
+            <img width="300px" max-height="500px" src="<?=$this->user['avatar']?>"/>
+	</div>
+	<div class="profile section">
+            <span class="profile large_element"><span class="profile signature_element">Signature:</span> <?=$this->user['post_signature']?></span>
+            <!--<span class="profile element"><span class="profile unique_element">Skype name:</span><?=$this->user['skype_name']?><?=$this->user['skype_name']?></a></span>
+            <span class="profile element"><span class="profile unique_element">Steam profile:</span><a href="steamcommunity.com/id/<?=$this->user['steam_name']?>"><?=$this->user['steam_name']?></a></span>
+            <span class="profile element"><span class="profile unique_element">Origin name:</span><?=$this->user['origin_name']?><?=$this->user['origin_name']?></a></span>
+        --></div>	
+    </div>
+</div>
