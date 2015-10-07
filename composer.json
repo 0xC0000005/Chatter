@@ -1,5 +1,5 @@
 {
-    "name": "Galaco/Chatter",
+    "name": "galaco/chatter",
     "description": "A lightweight forum module for ZF2",
     "type": "library",
     "license": "BSD-3-Clause",
