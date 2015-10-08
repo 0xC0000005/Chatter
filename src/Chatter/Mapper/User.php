@@ -44,8 +44,8 @@ class User extends AbstractDbMapper
 		$selectPost->from('post');
 		$selectPost->group('user_id');
 		$selectPost->columns([
-				'user_id',
-				'postcount' => new Expression('COUNT(user_id)'),
+			'user_id',
+			'postcount' => new Expression('COUNT(user_id)'),
 		]);
         
 		$predicate = new Predicate(null, Predicate::OP_AND);

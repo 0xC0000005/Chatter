@@ -30,7 +30,7 @@ class AccountController extends AbstractActionController
         }
 
 
-        $viewModel->setTemplate("forum/account/index");
+        $viewModel->setTemplate("chatter/account/index");
 	
         return $viewModel;
     }
@@ -48,7 +48,7 @@ class AccountController extends AbstractActionController
 		}
 
 		$viewModel->setVariable('user', $user);
-        $viewModel->setTemplate("forum/account/profile");
+        $viewModel->setTemplate("chatter/account/profile");
 	
         return $viewModel;
     }
@@ -60,22 +60,22 @@ class AccountController extends AbstractActionController
 		
 		$email = $this->params()->fromPost("email", false);
 		if ($email){
-			$viewModel->setTemplate("forum/account/reset");
+			$viewModel->setTemplate("chatter/account/reset");
 			$this->userService->sendPasswordEmail($email);
 			$viewModel->setVariable($submitted, true);
 		} else {
 			$uuid = $this->params()->fromPost("uuid", false);
 			$password = $this->params()->fromPost("password", false);
 			if ($uuid && $password){
-				$viewModel->setTemplate("forum/account/savedpass");
+				$viewModel->setTemplate("chatter/account/savedpass");
 			$this->userService->resetPassword($uuid, $password);
 			} else {
 				$uuid = $this->params()->fromQuery("uuid", false);
 				if ($uuid) {
 					$viewModel->setVariable("uuid", $uuid);
-					$viewModel->setTemplate("forum/account/newpass");
+					$viewModel->setTemplate("chatter/account/newpass");
 				} else {
-					$viewModel->setTemplate("forum/account/reset");
+					$viewModel->setTemplate("chatter/account/reset");
 				}
 			}
 		}

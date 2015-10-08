@@ -19,13 +19,13 @@ class IndexController extends AbstractActionController
 		if ($forumId) {
 			$forums = $this->forumService->getThreads($forumId);
 			$overView = $this->forumService->getForumPathInfo($forumId);
-			$viewModel->setTemplate("forum/forum/subforum");
+			$viewModel->setTemplate("chatter/forum/subforum");
 		} else {
 			$forums = $this->forumService->getForums();
-			$viewModel->setVariable('baseName', $this->getServiceLocator()->get('chatter_module_options')->getForumBaseName());
+			$viewModel->setVariable('baseName', $this->getServiceLocator()->get('chatter_module_options')->getChatterRootName());
 			$overView = $this->forumService->getGlobalForumInfo();
 			
-			$viewModel->setTemplate("forum/forum/index");
+			$viewModel->setTemplate("chatter/forum/index");
 		}
 
         $viewModel->setVariable('forums', $forums);

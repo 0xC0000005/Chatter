@@ -14,7 +14,7 @@ class AdminController extends AbstractActionController
 		$viewModel = new ViewModel();
         $this->hasAccess();
         
-        $viewModel->setTemplate("forum/admin/index");
+        $viewModel->setTemplate("chatter/admin/index");
 
         return $viewModel;
     }

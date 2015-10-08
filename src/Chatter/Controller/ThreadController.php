@@ -36,7 +36,7 @@ class ThreadController extends AbstractActionController
 			$viewModel->setVariable('threadid', $threadId);
 			$viewModel->setVariable('overView', $overView);
 			$viewModel->setVariable('thread', $thread);
-			$viewModel->setTemplate("forum/thread/index");
+			$viewModel->setTemplate("chatter/thread/index");
 		} else {
 			$this->redirect()->toUrl("/forum");
         }
@@ -72,7 +72,7 @@ class ThreadController extends AbstractActionController
 		$forumId = $this->params()->fromQuery('id', false);
 
 		$viewModel->setVariable('forumId', $forumId);
-		$viewModel->setTemplate("forum/thread/new");
+		$viewModel->setTemplate("chatter/thread/new");
 			
 		return $viewModel;
     }

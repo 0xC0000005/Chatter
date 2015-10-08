@@ -20,9 +20,9 @@ class PostController extends AbstractActionController
 		if ($postId !== false) {
 			$post = $this->forumService->getPost($postId);
 				$viewModel->setVariable('post', $post);
-			$viewModel->setTemplate("forum/post/index");
+			$viewModel->setTemplate("chatter/post/index");
 		} else {
-			$viewModel->setTemplate("forum/post/not_found");
+			$viewModel->setTemplate("chatter/post/not_found");
 		}
 	
         return $viewModel;
@@ -67,7 +67,7 @@ class PostController extends AbstractActionController
 		$threadId = $this->params()->fromQuery('thread', false);
 
 		$viewModel->setVariable('threadId', $threadId);
-		$viewModel->setTemplate("forum/post/new");
+		$viewModel->setTemplate("chatter/post/new");
 			
 		return $viewModel;
     }
@@ -89,7 +89,7 @@ class PostController extends AbstractActionController
 			} else {
 				$viewModel->setVariable('postId', $post['id']);
 				$viewModel->setVariable('postContent', $post['content']);
-				$viewModel->setTemplate("forum/post/edit");
+				$viewModel->setTemplate("chatter/post/edit");
 			}
 		} else {
 			$content = $this->params()->fromPost('message', false);

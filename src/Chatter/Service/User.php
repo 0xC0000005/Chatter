@@ -11,11 +11,11 @@ class User
     protected $emailContentMapper;
 
     protected $accessLevels = [
-	'banned' => 0,
-	'member' => 1,
-	'admin' => 2,
-	'staff' => 3,
-	'superuser' => 4
+		'banned' => 0,
+		'member' => 1,
+		'admin' => 2,
+		'staff' => 3,
+		'superuser' => 4
     ];
     
     public function getAccessLevel($userId = null, $minAccess = null)

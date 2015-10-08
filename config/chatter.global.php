@@ -2,12 +2,20 @@
 
 $settings = array(
    /**
-    * Base forum name
+    * Chatter installation name
     *
     * Specify the name of the forum. One might use domain name or site name.
     * Default: New Chatter Forum
     */
-    'forum_base_name' => 'New Chatter Forum',
+    'chatter_root_name' => 'New Chatter Forum',
+	
+   /**
+    * Email sendout address
+    *
+    * Specify the email address used to to set <From:> on email sendouts
+    * Default: not@configured.example.com
+    */
+    'chatter_email_sendout_address' => 'not@configured.example.com',
 
     /**
      * Zend\Db\Adapter\Adapter DI Alias

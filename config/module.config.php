@@ -53,19 +53,14 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Chatter\Controller\Index'   => 'Chatter\Controller\IndexController',
-            'Chatter\Controller\Thread'  => 'Chatter\Controller\ThreadController',
-            'Chatter\Controller\Post'    => 'Chatter\Controller\PostController',
             'Chatter\Controller\Account' => 'Chatter\Controller\AccountController',
-            'Chatter\Controller\Admin'	 => 'Chatter\Controller\AdminController'
+            'Chatter\Controller\Admin'	 => 'Chatter\Controller\AdminController',
+            'Chatter\Controller\Index'   => 'Chatter\Controller\IndexController',
+            'Chatter\Controller\Post'    => 'Chatter\Controller\PostController',
+            'Chatter\Controller\Thread'  => 'Chatter\Controller\ThreadController'
         ),
     ),
     'view_manager' => array(
-        'display_not_found_reason' => true,
-        'display_exceptions'       => true,
-        'doctype'                  => 'HTML5',
-        'not_found_template'       => 'error/404',
-        'exception_template'       => 'error/index',
         'template_map' => array(
             'forum/index/index' => __DIR__ . '/../view/forum/index/index.phtml',
         ),

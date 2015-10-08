@@ -9,7 +9,7 @@ Update your composer.json with this package, then install/update:
 
     ```json
     "require": {
-		"Galaco/Chatter-Forum": "dev-master"
+		"galaco/chatter": "dev-master"
     }
     ```
 	
