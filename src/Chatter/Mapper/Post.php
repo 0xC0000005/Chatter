@@ -28,22 +28,22 @@ class Post extends AbstractDbMapper
 		$select = new Select();
 		$select->from($this->tableName);
 		$select->order('date_added ASC');
-			$select->join(['po' => $selectPost], 'post.user_id = po.user_id', [], $select::JOIN_LEFT . ' ' . $select::JOIN_OUTER);
+		$select->join(['po' => $selectPost], 'post.user_id = po.user_id', [], $select::JOIN_LEFT . ' ' . $select::JOIN_OUTER);
 		$select->join('user', 'user.user_id = post.user_id', [], $select::JOIN_LEFT . ' ' . $select::JOIN_OUTER);
 		$select->limit(20);
 		$select->offset(($pageNo-1)*20);
 		$select->columns(
 	    [
-		'id',
-                'date_added',
-                'content',
-                'last_updated',
-                'username'    => new Expression('user.username'),
-                'user_title'  => new Expression('user.title'),
-                'user_avatar' => new Expression('user.avatar'),
-                'user_signature' => new Expression('user.post_signature'),
-                'user_joined' => new Expression('user.date_joined'),
-		'user_postcount' => new Expression('po.postcount')
+			'id',
+            'date_added',
+            'content',
+            'last_updated',
+            'username'    => new Expression('user.username'),
+            'user_title'  => new Expression('user.title'),
+            'user_avatar' => new Expression('user.avatar'),
+            'user_signature' => new Expression('user.post_signature'),
+            'user_joined' => new Expression('user.date_joined'),
+			'user_postcount' => new Expression('po.postcount')
             ],
             false
         );
@@ -71,13 +71,12 @@ class Post extends AbstractDbMapper
 
     public function savePost($threadId, $userId, $message)
     {
-		date_default_timezone_set("Europe/London");
-
+		$date = date('Y/m/d H:i:s');
 		$entity = [
 			'thread_id' => $threadId,
 			'user_id' => $userId,
 			'content' => $message,
-			'date_added' => date('Y/m/d H:i:s')
+			'date_added' => $date
 		];
 		
 		try {
@@ -86,10 +85,10 @@ class Post extends AbstractDbMapper
 			return false;
 		}
 
-		$e2 = ['date_updated' => date('Y/m/d H:i:s')];
+		$e2 = ['date_updated' => $date];
 
 		$predicate = new Predicate(null, Predicate::OP_AND);
-			$predicate->equalTo('id', $threadId);
+		$predicate->equalTo('id', $threadId);
 
 		try {
 			$result = parent::update($e2, $predicate, 'thread', null);
@@ -116,15 +115,13 @@ class Post extends AbstractDbMapper
 
     public function updatePost($postId, $content)
     {
-		date_default_timezone_set("Europe/London");
-
 		$entity = [
 			'content' => $content,
 			'last_updated' => date('Y/m/d H:i:s')
 		];
 
 		$predicate = new Predicate(null, Predicate::OP_AND);
-			$predicate->equalTo('id', $postId);
+		$predicate->equalTo('id', $postId);
 		
 		try {
 			$result = parent::update($entity, $predicate, $this->tableName, null);

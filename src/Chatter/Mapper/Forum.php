@@ -47,7 +47,7 @@ class Forum extends AbstractDbMapper
 			'thread_count'   => new Expression('count_for_forum'),
 			'last_poster'    => new Expression('last_post'),
 			'last_post_date' => new Expression('latest.date_updated'),
-			'last_thread' => new Expression('last_thread'),
+			'last_thread' 	 => new Expression('last_thread'),
 			'last_thread_id' => new Expression('last_thread_id')
 			], 
 			false
@@ -76,24 +76,24 @@ class Forum extends AbstractDbMapper
     {
 		$selectP = new Select();
 		$selectP->from('post')
-			->columns(['postcount' => new \Zend\Db\Sql\Expression('COUNT(id)')]);
-		$r1 = $this->select($selectP)->toArray();
+			->columns(['postcount' => new \Zend\Db\Sql\Expression('COUNT(*)')]);
+		$r1 = $this->select($selectP)->current();
 				
 		$selectT = new Select();
 		$selectT->from('thread')
-			->columns(['threadcount' => new \Zend\Db\Sql\Expression('COUNT(id)')]);
-		$r2 = $this->select($selectT)->toArray();
+			->columns(['threadcount' => new \Zend\Db\Sql\Expression('COUNT(*)')]);
+		$r2 = $this->select($selectT)->current();
 			
 		$select = new Select();
 		$select->from('user')
-            ->columns(['usercount' => new \Zend\Db\Sql\Expression('COUNT(id)')]);
-		$r3 = $this->select($select)->toArray();
+            ->columns(['usercount' => new \Zend\Db\Sql\Expression('COUNT(*)')]);
+		$r3 = $this->select($select)->current();
 			
 		$arr = [];
 			
-		$arr['postcount'] = $r1[0]['postcount'];
-		$arr['threadcount'] = $r2[0]['threadcount'];
-		$arr['usercount'] = $r3[0]['usercount'];
+		$arr['postcount'] = $r1->postcount;
+		$arr['threadcount'] = $r2->threadcount;
+		$arr['usercount'] = $r3->usercount;
 		return $arr;
     }
 
@@ -119,8 +119,10 @@ class Forum extends AbstractDbMapper
 
     private function getForumLatest()
     {
+		$select = new Select();
 		$select->from('thread')
-			->join('post', 'thread.id = post.thread_id AND thread.date_updated = post.date_added', [], $select::JOIN_INNER)
+			->join('post', 'thread.id = post.thread_id AND thread.date_updated = post.date_added', [], 
+			$select::JOIN_INNER)
 			->join('user', 'post.user_id = user.user_id', [], $select::JOIN_LEFT . ' ' . $select::JOIN_OUTER)
 			->columns([
 				'forum_id' => new Expression('thread.forum_id'),
@@ -129,6 +131,7 @@ class Forum extends AbstractDbMapper
 				'last_thread_id' => new Expression('thread.id'),
 				'date_updated' => new Expression('thread.date_updated')
 			]);
+		
 		return $select;
     }
 }

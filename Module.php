@@ -44,7 +44,8 @@ class Module
 				},
 				/*Services*/
 				'chatter_forum_service' => function ($sl) {
-					$service = new Service\Forum;                
+					$service = new Service\Forum;
+					
 					$postMapper = $sl->get('chatter_post_mapper');
 					$service->setCommentMapper($postMapper);
 					$forumMapper = $sl->get('chatter_forum_mapper');

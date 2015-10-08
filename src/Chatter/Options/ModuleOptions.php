@@ -14,6 +14,10 @@ class ModuleOptions extends AbstractOptions
      * @var array
      */
     protected $forumBaseName = array( 100 => 'New Chatter Forum' );
+    /**
+     * @var array
+     */
+    protected $chatterEmailSendoutAddress = array( 100 => 'chatter@example.com' );
 
     /**
      * Set zend db adapters
@@ -38,24 +42,46 @@ class ModuleOptions extends AbstractOptions
     }
     
     /**
-     * Set forum base name
+     * Set chatter root name
      *
      * @param array $forumBaseName
      * @return ModuleOptions
      */
-    public function setForumBaseName($forumBaseName)
+    public function setChatterRootName($forumBaseName)
     {
         $this->forumBaseName = $forumBaseName;
         return $this;
     }
 
     /**
-     * Get forum base name
+     * Get chatter root name
      *
      * @return array
      */
-    public function getForumBaseName()
+    public function getChatterRootName()
     {
         return $this->forumBaseName;
+    }
+    
+    /**
+     * Set chatter email sendout address
+     *
+     * @param array $chatterEmailSendoutAddress
+     * @return ModuleOptions
+     */
+    public function setChatterEmailSendoutAddress($chatterEmailSendoutAddress)
+    {
+        $this->chatterEmailSendoutAddress = $chatterEmailSendoutAddress;
+        return $this;
+    }
+
+    /**
+     * Get chatter email sendout address
+     *
+     * @return array
+     */
+    public function getChatterEmailSendoutAddress()
+    {
+        return $this->chatterEmailSendoutAddress;
     }
 }
