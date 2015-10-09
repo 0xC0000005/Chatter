@@ -10,9 +10,15 @@ class Module
 {
     public function onBootstrap(MvcEvent $e)
     {
-        $eventManager        = $e->getApplication()->getEventManager();
+        $em = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
-        $moduleRouteListener->attach($eventManager);
+        $moduleRouteListener->attach($em);
+		
+		$sm = $e->getApplication()->getServiceManager();
+		$headLink = $sm->get('viewhelpermanager')->get('headLink');
+		$headLink->appendStylesheet('/chatter/css/chatter.css');
+		$headScript = $sm->get('viewhelpermanager')->get('headScript');
+		$headScript->appendFile('https://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js', 'text/javascript', []);
     }
 
     public function getConfig()
@@ -45,6 +51,7 @@ class Module
 				/*Services*/
 				'chatter_forum_service' => function ($sl) {
 					$service = new Service\Forum;
+					$service->setModuleOptions($sl->get('chatter_module_options'));
 					
 					$postMapper = $sl->get('chatter_post_mapper');
 					$service->setCommentMapper($postMapper);

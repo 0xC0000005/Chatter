@@ -3,7 +3,7 @@
 namespace Chatter\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Chatter\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
@@ -14,22 +14,19 @@ class IndexController extends AbstractActionController
         $this->getForumService();
 
 		$viewModel = new ViewModel();
+		$viewModel->setTemplate("forum/index");
 
-		$forumId = $this->params()->fromQuery('id', false);
+		$forumId = $this->params()->fromQuery('id', false);	
+		
 		if ($forumId) {
 			$forums = $this->forumService->getThreads($forumId);
-			$overView = $this->forumService->getForumPathInfo($forumId);
-			$viewModel->setTemplate("chatter/forum/subforum");
+			$viewModel->setTemplate("forum/subforum");
 		} else {
 			$forums = $this->forumService->getForums();
-			$viewModel->setVariable('baseName', $this->getServiceLocator()->get('chatter_module_options')->getChatterRootName());
-			$overView = $this->forumService->getGlobalForumInfo();
-			
-			$viewModel->setTemplate("chatter/forum/index");
 		}
 
-        $viewModel->setVariable('forums', $forums);
-		$viewModel->setVariable('overView', $overView);
+		$viewModel->setVariable('navbar', $this->forumService->getForumHeaderData($forumId));
+		$viewModel->setVariable('forums', $forums);
 	
         return $viewModel;
     }
@@ -37,11 +34,5 @@ class IndexController extends AbstractActionController
     private function getForumService()
     {
 		$this->forumService = $this->getServiceLocator()->get('chatter_forum_service');
-    }
-
-    private function getUserService()
-    {
-		$this->userService = $this->getServiceLocator()->get('chatter_user_service');
-		return $this->userService;
     }
 }

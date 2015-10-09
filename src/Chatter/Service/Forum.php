@@ -4,8 +4,9 @@ namespace Chatter\Service;
 
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Chatter\Service\AbstractService;
 
-class Forum
+class Forum extends AbstractService
 {
     protected $forumMapper;
     protected $threadMapper;
@@ -116,24 +117,22 @@ class Forum
 		return $this->threadMapper->getThread($threadId)[0]['forum_id'];
     }
 	
-    public function getForumPathInfo($forumId, $threadId = null)
-    {
-		$result = $this->forumMapper->getForum($forumId)[0];
-		if ($threadId){
-			$thread = $this->threadMapper->getThread($threadId)[0];
+	public function getForumHeaderData($forumId = null, $threadId = null)
+	{
+		$result = null;
+		if ($forumId) {
+			$result = $this->forumMapper->getForum($forumId)[0];
+			if ($threadId){
+				$thread = $this->threadMapper->getThread($threadId)[0];
 				$result['thread_id'] = $thread['id'];
 				$result['thread_title'] = $thread['title'];
-		}	
+			}	
+		} else {
+			$result = $this->forumMapper->getGlobalInfo();
+			$result->rootname = $this->_moduleOptions->getChatterRootName();
+		}
 		return $result;
-    }
-
-    public function getGlobalForumInfo()
-    {
-		$result = $this->forumMapper->getGlobalInfo();
-		return $result;
-    }
-
-
+	}
 
     public function setForumMapper($mapper)
     {

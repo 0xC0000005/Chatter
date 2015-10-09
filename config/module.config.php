@@ -22,7 +22,7 @@ return array(
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'id'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id'    	 => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
                             'defaults' => array(
                             ),
@@ -62,7 +62,7 @@ return array(
     ),
     'view_manager' => array(
         'template_map' => array(
-            'forum/index/index' => __DIR__ . '/../view/forum/index/index.phtml',
+            'chatter/forum/index' => __DIR__ . '/../view/chatter/forum/index.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',

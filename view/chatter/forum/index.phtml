@@ -1,41 +1,39 @@
-<?php
-	$title = "Forum";
-	$this->headTitle($title);
-        
-        echo $this->headLink()->prependStylesheet($this->basePath() . '/content/css/chatter.css');
-?>
-<div id="subwrapper" class="index">
-	<div class="forum directory_path">
-	    <p>Welcome to <?= $this->baseName ?></p>
-	    <p>Threads: <?= $this->overView['threadcount'] ?> / Posts: <?= $this->overView['postcount'] ?> / Members: <?= $this->overView['usercount'] ?></p>
-        </div>
-	<div class="thread overview header">
-	    <span class="thread overview header title">Title</span>
-	    <span class="thread overview header views">Threads</span>
-	    <span class="thread overview header base_views">Last Post</span>
+<?php $this->headTitle("Index") ?>
+<div id="chatter_root">
+	<div id="chatter_navbar">
+	    <p>Welcome to <?= $this->navbar->rootname ?>, powered by <a href="http://github.com/galaco/chatter" target="_blank">Chatter</a></p>
+	    <p>Total threads: <?= $this->navbar->threads ?> / posts: <?= $this->navbar->posts ?> / members: <?= $this->navbar->users ?></p>
+    </div>
+	<div id="chatter_body">
+		<div class="chatter_forum_rowheaders">
+			<p class="title">Title</p>
+			<p class="last">Last Post</p>
+			<p class="count">Threads</p>
+		</div>
+		<?php foreach($this->forums as $forum): ?>
+			<div class="chatter_forum_category">
+				<?= $forum[0]['category']?>
+			</div>
+			<?php foreach($forum as $subforum): ?>
+			<div class="chatter_forum_row">
+				<div class="title">
+					<a href="/forum?id=<?= $subforum['id'] ?>"><?= $subforum['title'] ?></a>
+					<span class="description"><?= $subforum['description'] ?></span>
+				</div>
+				<div class="data">
+					<div class="last">
+					<?php if($subforum['last_poster']): ?>
+						<a class="thread" href="/forum/thread?id=<?= $subforum['last_thread_id'] ?>"><?= $subforum['last_thread'] ?></a> 
+						<p class="date"><?= $subforum['last_date'] ?> By <a href="/forum/account/profile?user=<?= $subforum['last_poster'] ?>"><?= $subforum['last_poster'] ?></a></p>
+					<?php else: ?>
+						<p>N/A</p>
+					<?php endif ?>
+					</div>
+					<div class="count"><p><?= $subforum['thread_count'] ?><p></div>
+				</div>
+			</div>
+			<?php endforeach ?>
+		</div>
+		<?php endforeach ?>
 	</div>
-	<?php foreach($this->forums as $forum): ?>
-            <div class="thread group"><div class="thread category"><?= $forum[0]['category']?></div>
-            <?php foreach($forum as $subforum): ?>
-                <div class="thread overview base">
-                    <div class="thread overview text">
-                        <span class="thread overview title">
-                            <a href="/forum?id=<?= $subforum['id'] ?>"><?= $subforum['title'] ?></a>
-                        </span>
-                        <span class="thread overview description"><?= $subforum['description'] ?></span>
-                        <div class="thread overview base_data">
-                            <span class="thread overview count"><?= $subforum['thread_count'] ?></span>
-                            <span class="thread overview count base_last">
-                            <?php if($subforum['last_poster']): ?>
-                            <a class="lhs" href="/forum/thread?id=<?= $subforum['last_thread_id'] ?>"><?= $subforum['last_thread'] ?></a> <?= $subforum['last_date'] ?> By <a href="/forum/account/profile?user=<?= $subforum['last_poster'] ?>"><?= $subforum['last_poster'] ?></a>
-                            <?php else: ?>
-                            <a>N/A</a>
-                            <?php endif ?>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach ?>
-            </div>
-	<?php endforeach ?>
 </div>

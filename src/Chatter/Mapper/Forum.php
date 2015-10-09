@@ -74,27 +74,28 @@ class Forum extends AbstractDbMapper
 	
     public function getGlobalInfo()
     {
-		$selectP = new Select();
-		$selectP->from('post')
-			->columns(['postcount' => new \Zend\Db\Sql\Expression('COUNT(*)')]);
-		$r1 = $this->select($selectP)->current();
+		$selPost = new Select();
+		$selPost->from('post')
+			->columns(['pc' => new \Zend\Db\Sql\Expression('COUNT(post.id)')]);
 				
-		$selectT = new Select();
-		$selectT->from('thread')
-			->columns(['threadcount' => new \Zend\Db\Sql\Expression('COUNT(*)')]);
-		$r2 = $this->select($selectT)->current();
-			
+		$selThread = new Select();
+		$selThread->from('thread')
+			->columns(['tc' => new \Zend\Db\Sql\Expression('COUNT(thread.id)')]);
+				
 		$select = new Select();
 		$select->from('user')
-            ->columns(['usercount' => new \Zend\Db\Sql\Expression('COUNT(*)')]);
-		$r3 = $this->select($select)->current();
+			->columns(
+				[
+					'users' 	=> new \Zend\Db\Sql\Expression('COUNT(user.user_id)'),
+					'threads' 	=> new \Zend\Db\Sql\Expression('?', [$selThread]),
+					'posts' 	=> new \Zend\Db\Sql\Expression('?', [$selPost])
 			
-		$arr = [];
+				]
+			);
 			
-		$arr['postcount'] = $r1->postcount;
-		$arr['threadcount'] = $r2->threadcount;
-		$arr['usercount'] = $r3->usercount;
-		return $arr;
+		$result = $this->select($select)->current();
+
+		return $result;
     }
 
 

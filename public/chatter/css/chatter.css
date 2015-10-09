@@ -1,0 +1,82 @@
+#chatter_root {
+	display: inline-block;
+	width: 100%;
+}
+
+#chatter_head, #chatter_body {
+	display: inline-block;
+	width: 100%;
+}
+
+.chatter_forum_rowheaders{
+	display: inline-block;
+	width: 100%;
+}
+
+
+.chatter_forum_rowheaders .title{
+	display: inline-block;
+	width: calc(100% - 320px);
+}
+
+.chatter_forum_rowheaders .last{
+	display: inline-block;
+	width: 240px;
+}
+
+.chatter_forum_rowheaders .count{
+	display: inline-block;
+	width: 72px;
+	
+}
+
+.chatter_forum_category{
+	display: inline-block;
+	width: 100%;
+}
+
+.chatter_forum_row{
+	display: inline-block;
+	width: 100%;
+}
+
+.chatter_forum_row .title{
+	display: inline-block;
+	vertical-align: top;
+	width: calc(100% - 320px);
+	height: 100%;
+}
+
+.chatter_forum_row .title .description{
+	display: block;
+}
+
+.chatter_forum_row .data{
+	display: inline-block;
+	vertical-align: top;
+	width: 316px;
+	height: 100%;
+}
+
+.chatter_forum_row .data .last{
+	display: inline-block;
+	vertical-align: top;
+	width: 240px;
+	height: 100%;
+}
+
+.chatter_forum_row .data .last .thread{
+	width: 100%;
+}
+
+.chatter_forum_row .data .last .date{
+	width: 100%;
+	display: block;
+}
+
+.chatter_forum_row .data .count{
+	display: inline-block;
+	vertical-align: top;
+	width: 72px;
+	height: 100%;
+}

@@ -28,7 +28,7 @@ class ThreadController extends AbstractActionController
 			$postList = $this->threadService->getPosts($threadId, $pageNo);
 			$thread = $this->threadService->getThread($threadId);
 			$posts = $this->postService->formatPostsforThread($postList);
-			$overView = $this->forumService->getForumPathInfo($this->forumService->getForumFromThread($threadId), $threadId);
+			$overView = $this->forumService->getForumHeaderData($this->forumService->getForumFromThread($threadId), $threadId);
 		
 			$viewModel->setVariable('posts', $posts);
 			$viewModel->setVariable('paginater', $paginater);
