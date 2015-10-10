@@ -1,56 +1,55 @@
 <?php
 	$this->headTitle($this->overView['title']);
 ?>
-<div id="subwrapper" class="index">
-        <div class="forum directory_path">
-            <p class="thread subdirectory">
-                <a href="/forum">Index</a><span class="libArrow"></span>
-            </p>
-            <p class="thread subdirectory">
-               <span class="libUnarrow"></span>
-               <a href="/forum?id=<?= $this->overView['id'] ?>"><?= $this->overView['title'] ?></a><span class="libArrow"></span>
+<div id="chatter_root">
+	<div id="chatter_navbar">
+        <div class="chatter_directory_path">
+            <a href="/forum">Index</a>
+            <a href="/forum?id=<?= $this->overView['id'] ?>"><?= $this->overView['title'] ?></a><span class="libArrow"></span>
         </div>
-	<div class="thread overview header">
-	    <span class="thread overview header title">Title</span>
-	    <span class="thread overview header views">Views</span>
-	    <span class="thread overview header replies">Replies</span>
-	    <span class="thread overview header last">Last Post</span>
-	</div>
-        <?php if(sizeof($this->forums) < 1): ?>
-	<div class="filler">There are no threads here yet. Click the New Thread button below to add a new thread</div>
+    </div>
+	<div id="chatter_body">
+		<div class="chatter_subforum_rowheaders">
+			<p class="title">Title</p>
+			<p class="views">Views</p>
+			<p class="replies">Replies</p>
+			<p class="last">Last Post</p>
+		</div>
+       <?php if(sizeof($this->forums) < 1): ?>
+		<div>
+			<p>There are no threads here yet. Click the New Thread button below to add a new thread
+		</div>
 	<?php else: ?>
 	<?php foreach($this->forums as $thread): ?>
-	<div class="thread overview base">
-	    <div class="thread overview text">
-		<span class="thread overview status">
-                <?php if($thread['sticky']): ?>
-                    <span class="stickyIcon"></span>
-		<?php endif ?>
-		</span>
-	        <span class="thread overview title">
-                <?php if($thread['sticky']): ?>
-                    Important:
-		<?php endif ?>
-                    <a href="/forum/thread?id=<?= $thread['id'] ?>"> <?= $thread['title'] ?></a>
-		</span>
-	        <span class="thread overview created">by <a href="/forum/account/profile?user=<?= $thread['creator']?>"><?= $thread['creator'] ?></a></span>
-	        <?php if ($this->zfcUserIdentity() && $this->isAdmin): ?>
-                    <span class="thread overview tools"><a class="deleteBtn" href="/forum/thread/delete?id=<?= $thread['id']?>&redirect=<?= $this->overView['id']?>"></a></span>
-                <?php endif ?>
-                <div class="thread overview data">
-	    	    <span class="thread overview count"><?= $thread['view_count'] ?></span>
-	    	    <span class="thread overview count"><?= $thread['post_count'] ?></span>
-	    	    <span class="thread overview count last">
-		        <a href="/forum/account/profile?user=<?= $thread['last_poster'] ?>"><?= $thread['last_poster'] ?></a>
-		        <?= $thread['last_date'] ?>
-		    </span>
-	        </div>
-	    </div>
-	</div>
+		<div class="chatter_thread">
+			<span class="rank">
+			<?php if($thread['sticky']): ?>
+				<span class="stickyIcon"></span>
+			<?php endif ?>
+			</span>
+			<p class="title">
+			<?php if($thread['sticky']): ?>
+					Important:
+			<?php endif ?>
+				<a href="/forum/thread?id=<?= $thread['id'] ?>"> <?= $thread['title'] ?></a>
+			</p>
+			<span class="thread overview created">by <a href="/forum/account/profile?user=<?= $thread['creator']?>"><?= $thread['creator'] ?></a></span>
+			<?php if ($this->zfcUserIdentity() && $this->isAdmin): ?>
+				<span class="thread overview tools"><a class="deleteBtn" href="/forum/thread/delete?id=<?= $thread['id']?>&redirect=<?= $this->overView['id']?>"></a></span>
+			<?php endif ?>
+			<div class="thread overview data">
+				<span class="thread overview count"><?= $thread['view_count'] ?></span>
+				<span class="thread overview count"><?= $thread['post_count'] ?></span>
+				<span class="thread overview count last">
+					<a href="/forum/account/profile?user=<?= $thread['last_poster'] ?>"><?= $thread['last_poster'] ?></a>
+					<?= $thread['last_date'] ?>
+				</span>
+			</div>
+		</div>
 	<?php endforeach ?>
 	<?php endif ?>
         <?php if ($this->zfcUserIdentity() && $this->zfcUserIdentity()->getUsername()): ?>
 	<div class="forum toolList"><a href="/forum/thread/new?id=<?= $this->overView['id']?>">New Thread</a></div>
         <?php endif ?>
-	<div style="clear:both"></div>
+	</div>
 </div>
