@@ -1,3 +1,5 @@
+# Bad code alert. Needs some serious TLC, and should definitely be rewritten from scratch.
+
 Chatter
 =======
 A lightweight forum module for Zend Framework 2
@@ -13,5 +15,5 @@ Update your composer.json with this package, then install/update:
     }
     ```
 	
-###Post installation
+### Post installation
 @TODO
