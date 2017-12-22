@@ -9,15 +9,15 @@ class ModuleOptions extends AbstractOptions
     /**
      * @var array
      */
-    protected $zendAdapter = array( 100 => 'Zend\Db\Adapter\Main' );
+    protected $zendAdapter = 'Zend\Db\Adapter\Main';
     /**
      * @var array
      */
-    protected $forumBaseName = array( 100 => 'New Chatter Forum' );
+    protected $forumBaseName = 'New Chatter Forum';
     /**
      * @var array
      */
-    protected $chatterEmailSendoutAddress = array( 100 => 'chatter@example.com' );
+    protected $chatterEmailSendoutAddress = 'chatter@example.com';
 
     /**
      * Set zend db adapters
