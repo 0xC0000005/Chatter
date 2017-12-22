@@ -9,7 +9,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * @var array
      */
-    protected $zendAdapter = 'Zend\Db\Adapter\Main';
+    protected $zendAdapter = 'Zend\Db\Adapter\Forum';
     /**
      * @var array
      */
