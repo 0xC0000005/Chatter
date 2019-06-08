@@ -1,4 +1,4 @@
-# Bad code alert. Needs some serious TLC, and should definitely be rewritten from scratch.
+## This project is archived. Usage is not recommended.
 
 Chatter
 =======
